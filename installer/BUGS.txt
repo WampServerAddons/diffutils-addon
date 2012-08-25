@@ -1,2 +1,0 @@
-Current bugs in the installer
-
