@@ -37,18 +37,23 @@ mkdir %TMP%
 REM download diffutils archives to temp directory
 echo 	Downloading %ADDON% binaries to temp directory...
 wget.exe -nd -q -P %TMP% %DIFFUTILS_DOWNLOAD%/%DIFFUTILS_BIN_FILE%.zip
+if not %ERRORLEVEL%==0 (echo FAIL: could not download %ADDON% binaries& pause& exit 1)
 wget.exe -nd -q -P %TMP% %DIFFUTILS_DOWNLOAD%/%DIFFUTILS_DEPS_FILE%.zip
+if not %ERRORLEVEL%==0 (echo FAIL: could not download %ADDON% binaries& pause& exit 1)
 
 REM unzip the downloaded source files and install them
 echo 	Extracting the files from the downloaded archive...
 mkdir %TMP%\%DIFFUTILS_DIR%
 unzip.exe -q %TMP%\%DIFFUTILS_DEPS_FILE%.zip bin\* -d %TMP%\%DIFFUTILS_DIR%
+if not %ERRORLEVEL%==0 (echo FAIL: could not extract %ADDON% binaries& pause& exit 1)
 unzip.exe -q %TMP%\%DIFFUTILS_BIN_FILE%.zip bin\* -d %TMP%\%DIFFUTILS_DIR%
+if not %ERRORLEVEL%==0 (echo FAIL: could not extract %ADDON% binaries& pause& exit 1)
 
 REM install the binary files in the WampServer install directory
 echo 	Moving the files to the WampServer install directory...
 mkdir %WAMP_DIFFUTILS%
 move %TMP%\%DIFFUTILS_DIR% %WAMP_DIFFUTILS%
+if not %ERRORLEVEL%==0 (echo FAIL: could not install %ADDON% binaries& pause& exit 1)
 
 REM add the Diffutils bin directory to the PATH so apache can find them
 echo 	Setting enviorment variables...
