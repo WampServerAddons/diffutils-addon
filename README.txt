@@ -34,7 +34,3 @@ Using the Installer:
  usage: installer.bat
 
 
-TODO:
-
-FIXME:
- * spelling/capitalization check on all files
